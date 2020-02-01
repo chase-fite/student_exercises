@@ -13,14 +13,14 @@ cohort_1 = Cohort("cohort 1")
 cohort_2 = Cohort("cohort 2")
 cohort_3 = Cohort("cohort 3")
 
-chase = Student("chase", "f", "chase_slack", "cohort 1")
-corri = Student("corri", "g", "corri_slack", "cohort 3")
-matt = Student("matt", "b", "matt_slack", "cohort 3")
-ryan = Student("ryan", "b", "ryan_slack", "cohort 3")
+chase = Student("Chase", "F", "chase_slack", "cohort 1")
+corri = Student("Corri", "G", "corri_slack", "cohort 3")
+matt = Student("Matt", "B", "matt_slack", "cohort 3")
+ryan = Student("Ryan", "B", "ryan_slack", "cohort 3")
 
-brad = Instructor("brad", "s", "brad_slack", "cohort 1", "nerd jokes")
-josh = Instructor("josh", "d", "josh_slack", "cohort 2", "embarassing people")
-kayla = Instructor("kayla", "s", "kayla_slack", "cohort 3", "explanations")
+brad = Instructor("Brad", "S", "brad_slack", "cohort 1", "nerd jokes")
+josh = Instructor("Josh", "D", "josh_slack", "cohort 2", "embarassing people")
+kayla = Instructor("Kayla", "S", "kayla_slack", "cohort 3", "explanations")
 
 exercise_list = [exercise_1, exercise_2, exercise_3, exercise_4]
 student_list = [chase, corri, matt, ryan]
@@ -32,6 +32,17 @@ for instructor in instructor_list:
             rand_num = randint(0, 3)
             instructor.assign_exercise(student, exercise_list[rand_num])
 
+# for student in student_list:
+#     for exercise in student.list_current_exercises():
+#         print(f'{student.full_name}: {exercise}')
+
+# Ivan is working on Kandy Korner, Stocks Report, and Planet List.
+
 for student in student_list:
-    for exercise in student.list_current_exercises():
-        print(f'{student.full_name()}: {exercise}')
+    report_string = f'{student.first_name} is working on '
+    for i in range(len(student.list_current_exercises())):
+        if i == len(student.list_current_exercises()) - 1:
+            report_string += f'and {student.list_current_exercises()[i]}.\n'
+        else:
+            report_string += f'{student.list_current_exercises()[i]}, '
+    print(report_string)

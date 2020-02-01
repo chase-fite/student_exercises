@@ -9,6 +9,11 @@ class Student:
         self.__cohort = cohort
         self.__current_exercises = []
 
+    @property
+    def first_name(self):
+        return self.__first_name
+
+    @property
     def full_name(self):
         return f'{self.__first_name} {self.__last_name}'
 
@@ -18,5 +23,5 @@ class Student:
     def list_current_exercises(self):
         exercise_list = []
         for exercise in self.__current_exercises:
-            exercise_list.append(f'{exercise.name} - {exercise.language}')
+            exercise_list.append(f'{exercise.name} in {exercise.language}')
         return exercise_list
