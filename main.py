@@ -33,16 +33,14 @@ for instructor in instructor_list:
             instructor.assign_exercise(student, exercise_list[rand_num])
 
 # for student in student_list:
-#     for exercise in student.list_current_exercises():
-#         print(f'{student.full_name}: {exercise}')
-
-# Ivan is working on Kandy Korner, Stocks Report, and Planet List.
+#     for exercise in student.current_exercises:
+#         print(f'{student.first_name}: {exercise}')
 
 for student in student_list:
     report_string = f'{student.first_name} is working on '
-    for i in range(len(student.list_current_exercises())):
-        if i == len(student.list_current_exercises()) - 1:
-            report_string += f'and {student.list_current_exercises()[i]}.\n'
+    for i in range(len(student.current_exercises)):
+        if i == len(student.current_exercises) - 1:
+            report_string += f'and {student.current_exercises[i]}.\n'
         else:
-            report_string += f'{student.list_current_exercises()[i]}, '
+            report_string += f'{student.current_exercises[i]}, '
     print(report_string)
