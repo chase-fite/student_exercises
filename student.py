@@ -15,3 +15,6 @@ class Student(NSSPerson):
         for exercise in self.__current_exercises:
             exercise_list.append(f'{exercise.name} in {exercise.language}')
         return exercise_list
+
+    def __repr__(self):
+        return f'{self.first_name} {self.last_name} is in {self.cohort}'

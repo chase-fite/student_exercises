@@ -7,7 +7,7 @@ class StudentExerciseReports():
     """Methods for reports on the Student Exercises database"""
 
     def __init__(self):
-        self.db_path = "/absolute/path/to/home/directory/workspace/python/exercises/studentexercises/studentexercises.db"
+        self.db_path = "/Users/Chase/workspace/python/student_exercises/studentexercises.db"
 
     def all_students(self):
 
@@ -33,8 +33,7 @@ class StudentExerciseReports():
 
             all_students = db_cursor.fetchall()
 
-            for student in all_students:
-                print(f'{student[1]} {student[2]} is in {student[5]}')
+            [print(s) for s in all_students]
 
 reports = StudentExerciseReports()
 reports.all_students()

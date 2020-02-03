@@ -3,6 +3,7 @@ from cohort import Cohort
 from student import Student
 from instructor import Instructor
 from random import randint
+from reports import StudentExerciseReports
 
 exercise_1 = Exercise("e1", "python")
 exercise_2 = Exercise("e2", "python")
@@ -36,11 +37,11 @@ for instructor in instructor_list:
 #     for exercise in student.current_exercises:
 #         print(f'{student.first_name}: {exercise}')
 
-for student in student_list:
-    report_string = f'{student.first_name} is working on '
-    for i in range(len(student.current_exercises)):
-        if i == len(student.current_exercises) - 1:
-            report_string += f'and {student.current_exercises[i]}.\n'
-        else:
-            report_string += f'{student.current_exercises[i]}, '
-    print(report_string)
+# for student in student_list:
+#     report_string = f'{student.first_name} is working on '
+#     for i in range(len(student.current_exercises)):
+#         if i == len(student.current_exercises) - 1:
+#             report_string += f'and {student.current_exercises[i]}.\n'
+#         else:
+#             report_string += f'{student.current_exercises[i]}, '
+#     print(report_string)
