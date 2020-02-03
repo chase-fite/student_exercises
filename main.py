@@ -19,7 +19,7 @@ matt = Student("Matt", "B", "matt_slack", "cohort 3")
 ryan = Student("Ryan", "B", "ryan_slack", "cohort 3")
 
 brad = Instructor("Brad", "S", "brad_slack", "cohort 1", "nerd jokes")
-josh = Instructor("Josh", "D", "josh_slack", "cohort 2", "embarassing people")
+josh = Instructor("Josh", "D", "josh_slack", "cohort 2", "embarrassing people")
 kayla = Instructor("Kayla", "S", "kayla_slack", "cohort 3", "explanations")
 
 exercise_list = [exercise_1, exercise_2, exercise_3, exercise_4]
