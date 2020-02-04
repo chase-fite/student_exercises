@@ -17,5 +17,9 @@ class NSSPerson:
         return self.__last_name
 
     @property
+    def slack_handle(self):
+        return self.__slack_handle
+
+    @property
     def cohort(self):
         return self.__cohort
