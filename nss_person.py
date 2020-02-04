@@ -11,3 +11,11 @@ class NSSPerson:
     @property
     def first_name(self):
         return self.__first_name
+
+    @property
+    def last_name(self):
+        return self.__last_name
+
+    @property
+    def cohort(self):
+        return self.__cohort
