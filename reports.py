@@ -156,18 +156,64 @@ class StudentExerciseReports():
 
             [print(i) for i in all_instructors]
 
+    def students_with_exercises(self):
+
+        """Retrieve all students with the cohort name"""
+
+        with sqlite3.connect(self.db_path) as conn:
+            # conn.row_factory here
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            select
+                e.Id ExerciseId,
+                e.Name,
+                s.Id,
+                s.FirstName,
+                s.LastName
+            from Exercise e
+            join StudentExercise se on se.ExerciseId = e.Id
+            join Student s on s.Id = se.StudentId
+            """)
+
+            students_with_exercises = db_cursor.fetchall()
+
+            exercises = dict()
+
+            for row in students_with_exercises:
+                exercise_id = row[0]
+                exercise_name = row[1]
+                student_id = row[2]
+                student_name = f'{row[3]} {row[4]}'
+
+                if student_name not in exercises:
+                    exercises[student_name] = [exercise_name]
+                else:
+                    exercises[student_name].append(exercise_name)
+
+            for key, value in exercises.items():
+                print(f'{key} is working on:')
+                for exercise in value:
+                    print(f'\t* {exercise}')
+
 reports = StudentExerciseReports()
-print()
-reports.all_cohorts()
-print()
-reports.all_exercises()
-print()
-reports.all_javascript_exercises()
-print()
-reports.all_python_exercises()
-print()
-reports.all_java_exercises()
-print()
-reports.all_students()
-print()
-reports.all_instructors()
+
+# part four of student exercises
+# print()
+# reports.all_cohorts()
+# print()
+# reports.all_exercises()
+# print()
+# reports.all_javascript_exercises()
+# print()
+# reports.all_python_exercises()
+# print()
+# reports.all_java_exercises()
+# print()
+# reports.all_students()
+# print()
+# reports.all_instructors()
+
+# student workload / part five
+
+reports.students_with_exercises()
