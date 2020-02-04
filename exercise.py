@@ -13,3 +13,6 @@ class Exercise:
     @property
     def language(self):
         return self.__language
+
+    def __repr__(self):
+        return f'{self.__name} using {self.__language}'
