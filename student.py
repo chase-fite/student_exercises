@@ -11,10 +11,7 @@ class Student(NSSPerson):
 
     @property
     def current_exercises(self):
-        exercise_list = []
-        for exercise in self.__current_exercises:
-            exercise_list.append(f'{exercise.name} in {exercise.language}')
-        return exercise_list
+        return self.__current_exercises
 
-    def __repr__(self):
-        return f'{self.first_name} {self.last_name} is in {self.cohort}'
+    # def __repr__(self):
+    #     return f'{self.first_name} {self.last_name} is in {self.cohort}'

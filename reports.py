@@ -168,6 +168,63 @@ class StudentExerciseReports():
             select
                 e.Id ExerciseId,
                 e.Name,
+                e.ExLanguage,
+                s.Id,
+                s.FirstName,
+                s.LastName,
+                s.SlackHandle,
+                c.Name
+            from Exercise e
+            join StudentExercise se on se.ExerciseId = e.Id
+            join Student s on s.Id = se.StudentId
+            join Cohort c on s.CohortId = c.Id
+            """)
+
+            students_with_exercises = db_cursor.fetchall()
+
+            students = dict()
+
+            for row in students_with_exercises:
+
+                if row[3] not in students:
+                    students[row[3]] = Student(row[4], row[5], row[6], row[7])
+                    students[row[3]].add_exercise(Exercise(row[1], row[2]))
+                else:
+                    students[row[3]].add_exercise(Exercise(row[1], row[2]))
+
+            for key in students:
+                print(f'{students[key].first_name} {students[key].last_name} is working on:')
+                for exercise in students[key].current_exercises:
+                    print(f'\t* {exercise}')       
+
+            # for row in students_with_exercises:
+            #     exercise_id = row[0]
+            #     exercise_name = row[1]
+            #     student_id = row[2]
+            #     student_name = f'{row[3]} {row[4]}'
+
+            #     if student_name not in exercises:
+            #         exercises[student_name] = [exercise_name]
+            #     else:
+            #         exercises[student_name].append(exercise_name)
+
+            # for key, value in exercises.items():
+            #     print(f'{key} is working on:')
+            #     for exercise in value:
+            #         print(f'\t* {exercise}')
+
+    def exercises_with_students(self):
+
+        """Retrieve all students with the cohort name"""
+
+        with sqlite3.connect(self.db_path) as conn:
+            # conn.row_factory here
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            select
+                e.Id ExerciseId,
+                e.Name,
                 s.Id,
                 s.FirstName,
                 s.LastName
@@ -176,23 +233,62 @@ class StudentExerciseReports():
             join Student s on s.Id = se.StudentId
             """)
 
-            students_with_exercises = db_cursor.fetchall()
+            exercises_with_students = db_cursor.fetchall()
 
             exercises = dict()
 
-            for row in students_with_exercises:
+            for row in exercises_with_students:
                 exercise_id = row[0]
                 exercise_name = row[1]
                 student_id = row[2]
                 student_name = f'{row[3]} {row[4]}'
 
-                if student_name not in exercises:
-                    exercises[student_name] = [exercise_name]
+                if exercise_name not in exercises:
+                    exercises[exercise_name] = [student_name]
                 else:
-                    exercises[student_name].append(exercise_name)
+                    exercises[exercise_name].append(student_name)
 
             for key, value in exercises.items():
-                print(f'{key} is working on:')
+                print(f'{key} is being worked on by:')
+                for student in value:
+                    print(f'\t* {student}')
+
+    def assigned_exercises(self):
+
+        """Retrieve all students with the cohort name"""
+
+        with sqlite3.connect(self.db_path) as conn:
+            # conn.row_factory here
+            db_cursor = conn.cursor()
+
+            db_cursor.execute("""
+            select
+            e.Name,
+            i.FirstName,
+            i.LastName
+            from Exercise e
+            join StudentExercise se on se.ExerciseId = e.Id
+            join Student s on se.StudentId = s.Id
+            join Instructor i on se.InstructorId = i.Id
+            """)
+
+            assigned_exercises = db_cursor.fetchall()
+
+            # print(assigned_exercises)
+
+            assignments = dict()
+
+            for row in assigned_exercises:
+                exercise_name = row[0]
+                instructor_name = f'{row[1]} {row[2]}'
+
+                if instructor_name not in assignments:
+                    assignments[instructor_name] = [exercise_name]
+                else:
+                    assignments[instructor_name].append(exercise_name)
+
+            for key, value in assignments.items():
+                print(f'{key} has assigned:')
                 for exercise in value:
                     print(f'\t* {exercise}')
 
@@ -216,4 +312,9 @@ reports = StudentExerciseReports()
 
 # student workload / part five
 
+print()
 reports.students_with_exercises()
+print()
+reports.exercises_with_students()
+print()
+reports.assigned_exercises()

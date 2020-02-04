@@ -31,9 +31,10 @@ CREATE TABLE Exercise (
 );
 
 CREATE TABLE StudentExercise (
-	Id			INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	StudentId	INTEGER NOT NULL,
-	ExerciseId	INTEGER NOT NULL,
+	Id				INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	StudentId		INTEGER NOT NULL,
+	ExerciseId		INTEGER NOT NULL,
+	InstructorId	INTEGER NOT NULL,
 	FOREIGN KEY(StudentId) REFERENCES Student(Id)
 	FOREIGN KEY(ExerciseId) REFERENCES Exercise(Id)
 );
@@ -101,45 +102,45 @@ VALUES (null, "Shawna", "C", "shawna_slack", 2);
 SELECT * FROM Student;
 
 INSERT INTO StudentExercise
-VALUES (null, 1, 1);
+VALUES (null, 1, 1, 1);
 
 INSERT INTO StudentExercise
-VALUES (null, 1, 2);
+VALUES (null, 1, 2, 2);
 
 INSERT INTO StudentExercise
-VALUES (null, 2, 3);
+VALUES (null, 2, 3, 3);
 
 INSERT INTO StudentExercise
-VALUES (null, 2, 4);
+VALUES (null, 2, 4, 1);
 
 INSERT INTO StudentExercise
-VALUES (null, 3, 5);
+VALUES (null, 3, 5, 2);
 
 INSERT INTO StudentExercise
-VALUES (null, 3, 1);
+VALUES (null, 3, 1, 3);
 
 INSERT INTO StudentExercise
-VALUES (null, 4, 2);
+VALUES (null, 4, 2, 1);
 
 INSERT INTO StudentExercise
-VALUES (null, 4, 3);
+VALUES (null, 4, 3, 2);
 
 INSERT INTO StudentExercise
-VALUES (null, 5, 4);
+VALUES (null, 5, 4, 3);
 
 INSERT INTO StudentExercise
-VALUES (null, 5, 5);
+VALUES (null, 5, 5, 1);
 
 INSERT INTO StudentExercise
-VALUES (null, 6, 1);
+VALUES (null, 6, 1, 2);
 
 INSERT INTO StudentExercise
-VALUES (null, 6, 2);
+VALUES (null, 6, 2, 3);
 
 INSERT INTO StudentExercise
-VALUES (null, 7, 3);
+VALUES (null, 7, 3, 1);
 
 INSERT INTO StudentExercise
-VALUES (null, 7, 4);
+VALUES (null, 7, 4, 2);
 
 SELECT * FROM StudentExercise;
